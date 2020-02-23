@@ -120,32 +120,3 @@ void globalText (int size) {
   textFont(cSansMS);
   textSize(size);
 }
-
-//notes
-
-  //list of issues:
-
-    //spikes don't have hitboxes (not started)
-    //spikes spawn ALWAYS when there is overlap, random needs implemented (1/2, 2/3 ?) (not started)
-    
-    //jumping along the side and over a platform snaps you to the floor instead of continuing up (maybe its just "movement tech" :^) )
-
-    //entering the air without jumping allows you to buffer a jump
-
-    //timer makes it so the game has to restart in order for the timer to reset. it also only records latest time, not high score
-
-
-  //features to do next:
-
-    //spawning platforms, having them move up, despawn off the top, stay on the ground when they move
-
-    //levels, speeds, score when you pass a platform, osd(?), menu, PogU
-
-    //MK ghosts :eyes:
-
-
-  //list of old issues that were amusing:
-
-    //SUMMET IS UP WITH AIRSTATE (ur dumb lol, literally one pixel)
-
-    //"list of issues: none" KEKW
