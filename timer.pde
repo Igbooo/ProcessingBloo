@@ -26,6 +26,9 @@ class timer { //the timer and high score system lives and displays here
     catch (ArrayIndexOutOfBoundsException exception1) {
         finishTime = createWriter("hiScore.txt");
     }
+    catch (NullPointerException exception2) {
+      finishTime = createWriter("hiScore.txt");
+    }
   }
   
   void millisReset() {
@@ -44,9 +47,13 @@ class timer { //the timer and high score system lives and displays here
   void displayTimer() {
     
     globalText(20);
+    
+    text("Tries: " + tries, timerX + 250, timerY + 10);
 
     if (hiScore != null) {
-      text("High Score: " + hiScore, timerX + 250, timerY);
+      text("High Score: " + hiScore, timerX + 250, timerY - 20);
+    } else {
+      text("Complete a run to set a high score", timerX + 150, timerY - 20);
     }
     
     globalText(32);
@@ -85,8 +92,7 @@ class timer { //the timer and high score system lives and displays here
   void hiCheck() {
     ms -= 2;
     if (hiScore != null) {
-      //if (timeOverTen == false) {
-      int [] hiTime = int(split(hiScore, ':'));
+      int [] hiTime = int(split(hiScore, ':')); //<>//
       if (minutes < hiTime[0]) {
         writeTime();
       } else if (minutes > hiTime[0]) {

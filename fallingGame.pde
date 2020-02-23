@@ -20,6 +20,7 @@ boolean lowResMode = false;
 boolean leftLockOut = false;
 boolean rightLockOut = false;
 int deathType = 0; //0 = not dead, 1 = spike death, 2 = win
+int tries = 0;
 
 
 void settings() {
@@ -34,7 +35,7 @@ void setup() {
   background = loadImage("altBG.png");
   backgroundLowRes = loadImage("altBGLowRes.png");
   bgMusic = new SoundFile(this, "bgCLP.wav");
-  bgMusic.amp(0.05);
+  bgMusic.amp(0); //default 0.05
   bgMusic.loop();
   cSansMS = createFont("comic.ttf", 32);
   PImage icon = loadImage("icon1.png");
@@ -62,29 +63,40 @@ void draw() {
     blue.render();
     obstacleInit.spikeDisplay();
   } else {
-    if (!Timer.endRan) {
-      Timer.end();
-    }
-    bgMusic.stop();
-    fill(55, 55, 55);
-    rect(105, height / 2 - 55, 290, 190); //backdrop for the gameover text
-    globalText(52);
-    if (deathType == 1) {
-      text("Game over\n'R' to restart", 125, height / 2);
-    } else if (deathType == 2){
-      text("You win! \n'R' to restart", 125, height / 2);
-    }
-    
-    if (inputArray[3]) {
-      bgMusic.loop();
-      deathType = 0;
-      obstacleInit.platformRedraw();
-      obstacleInit.spikeRedraw();
-      blue.defXY();
-      Timer.millisReset();
-      //exit();
-    }
+    endSplash();
   }
+}
+
+void endSplash() {
+  if (!Timer.endRan) {
+    Timer.end();
+  }
+  bgMusic.stop();
+  fill(55, 55, 55);
+  rect(0, height / 2 - 55, width, 190); //backdrop for the gameover text
+  globalText(52);
+  textAlign(CENTER, TOP);
+  if (deathType == 1) {
+    text("Game over\n'R' to restart", 0, height / 2 - 55, width, 190);
+  } else if (deathType == 2) {
+    text("You win! \n'R' to restart", 0, height / 2 - 55, width, 190);
+  }
+
+  if (inputArray[3]) {
+    restart();
+  }
+}
+
+void restart() {
+  Timer.endRan = false;
+  tries += 1;
+  bgMusic.loop();
+  deathType = 0;
+  obstacleInit.platformRedraw();
+  obstacleInit.spikeRedraw();
+  blue.defXY();
+  Timer.millisReset();
+  Timer.loadHiScore();
 }
 
 void keyPressed() {
@@ -121,4 +133,5 @@ void globalText (int size) {
   fill(255);
   textFont(cSansMS);
   textSize(size);
+  textAlign(TOP);
 }
