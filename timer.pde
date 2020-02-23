@@ -53,7 +53,7 @@ class timer { //the timer and high score system lives and displays here
         } else {
           text("0" + minutes + ":0" + seconds + ":" + ms, timerX, timerY);
         } 
-      } else { //<>//
+      } else {
         if (ms < 10) {
           text("0" + minutes + ":" + seconds + ":0" + ms, timerX, timerY);
         } else {
@@ -79,7 +79,7 @@ class timer { //the timer and high score system lives and displays here
 
   void hiCheck() {
     ms -= 2;
-    if (hiScore != null) { //<>//
+    if (hiScore != null) {
       //if (timeOverTen == false) {
       int [] hiTime = int(split(hiScore, ':'));
       if (minutes < hiTime[0]) {

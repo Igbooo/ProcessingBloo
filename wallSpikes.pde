@@ -3,6 +3,8 @@ class wallSpikes { //wall spikes are made here. like the player, they are animat
   int y;
   int dir;
   int imgNo = 1;
+  int spikeHeight = 86;
+  int spikeWidth = 32;
   PImage [] wallSpikeLeft;
   PImage [] wallSpikeRight;
 

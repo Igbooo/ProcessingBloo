@@ -15,9 +15,12 @@ PrintWriter finishTime;
 boolean inputArray[] = new boolean [4]; // 0=LEFT, 1=RIGHT, 2=JUMP 3=RESTART
 ArrayList<platform> platformList = new ArrayList<platform>();
 ArrayList<wallSpikes> spikeList = new ArrayList<wallSpikes>();
-boolean sideLockOut = false;
-boolean gameEndTrigger = false;
+//boolean gameEndTrigger = false;
 boolean lowResMode = false;
+boolean leftLockOut = false;
+boolean rightLockOut = false;
+int deathType = 0; //0 = not dead, 1 = spike death, 2 = win
+
 
 void settings() {
   if (lowResMode) {
@@ -47,8 +50,8 @@ void setup() {
 }
 
 void draw() {
-  if (!gameEndTrigger) {
-    if (lowResMode) {
+  if (deathType == 0) {
+    if (lowResMode) { //<>//
       background(backgroundLowRes);
     } else {
       background(background);
@@ -58,15 +61,20 @@ void draw() {
     Timer.render();
     blue.render();
     obstacleInit.spikeDisplay();
-  } else if (gameEndTrigger) {
-    if (!Timer.endRan) {
+  } else {
+    if (!Timer.endRan) { //<>//
       Timer.end();
     }
     bgMusic.stop();
     fill(55, 55, 55);
     rect(105, height / 2 - 55, 290, 190); //backdrop for the gameover text
     globalText(52);
-    text("Game over\n'R' to quit", 125, height / 2);
+    if (deathType == 1) {
+      text("Game over\n'R' to quit", 125, height / 2);
+    } else if (deathType == 2){
+      text("You win! \n'R' to quit", 125, height / 2);
+    }
+    
     if (inputArray[3]) {
       //bgMusic.loop();
       //blue.gameEndTrigger = false;

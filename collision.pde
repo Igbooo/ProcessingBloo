@@ -12,7 +12,7 @@ class collision { //this is where we detect wether a passed in player object is 
     int leftCollPlt = -1;
     int rightCollPlt = -1;
 
-
+    //Ceiling
     for (int i = 0; i < platformList.size(); i++) {
       collided = ceilingCollide(i);
       if (collided != -1) {
@@ -22,7 +22,7 @@ class collision { //this is where we detect wether a passed in player object is 
     if (bonkPlt != -1) {
       bonkLogic();
     }
-
+    //left wall
     for (int i = 0; i < platformList.size(); i++) {
       collided = leftWallCollide(i);
       if (collided != -1) {
@@ -30,8 +30,10 @@ class collision { //this is where we detect wether a passed in player object is 
       }
     }
     if (leftCollPlt != -1) {
-      wallCollLogic(leftCollPlt);
+      wallCollLogic(2);
     } else {
+      rightLockOut = false;
+      //right wall
       for (int i = 0; i < platformList.size(); i++) {
         collided = rightWallCollide(i);
         if (collided != -1) {
@@ -39,23 +41,28 @@ class collision { //this is where we detect wether a passed in player object is 
         }
       }
       if (rightCollPlt != -1) {
-        wallCollLogic(rightCollPlt);
+        wallCollLogic(1);
       } else { 
-        sideLockOut = false;
+        leftLockOut = false;
       }
     }
 
+    //floor
     for (int i = 0; i < platformList.size(); i++) {
       collided = collide(i);
       if (collided != -1) {
         collidedPlt = collided;
       }
     }
-
     if (collidedPlt == -1) {
       airLogic();
     } else {
       collideLogic(collidedPlt);
+    }
+
+    //Spikes 
+    for (int i = 0; i < spikeList.size(); i++) {
+      spikesCollide(i);
     }
   }
 
@@ -110,6 +117,32 @@ class collision { //this is where we detect wether a passed in player object is 
     }
   }
 
+  void spikesCollide(int i) {
+    wallSpikes currentSpikes = spikeList.get(i);
+    if (currentPlayer.y + 55 > currentSpikes.y &&
+      currentPlayer.y + 7 < currentSpikes.y + currentSpikes.spikeHeight) {
+      if (currentPlayer.x + 12 > currentSpikes.x && currentPlayer.x + 12 < currentSpikes.x + currentSpikes.spikeWidth) { //hit right side
+        if (currentSpikes.dir == 1) {
+          wallCollLogic(currentSpikes.dir);
+        } else if (currentSpikes.dir == 2) {
+          spikeBladeCollide();
+        }
+      } else if (currentPlayer.x + 50 < currentSpikes.x + 10 && currentPlayer.x + 50 > currentSpikes.x) { //hit left side
+        if (currentSpikes.dir == 1) {
+          spikeBladeCollide();
+        } else if (currentSpikes.dir == 2) {
+          wallCollLogic(currentSpikes.dir);
+        }
+      }
+    } else {
+      ;
+    }
+  }
+
+  void spikeBladeCollide(){
+    deathType = 1; //<>//
+  }
+
   void bonkLogic() {
     if (currentPlayer.fallSpeed < 0) {
       currentPlayer.fallSpeed = 0;
@@ -124,9 +157,12 @@ class collision { //this is where we detect wether a passed in player object is 
     currentPlayer.jump = false; // enable jump input
   }
 
-  void wallCollLogic(int pltLocation) {
-    platform currentPlt = platformList.get(pltLocation);
-    sideLockOut = true;
+  void wallCollLogic(int side) {//1 = left, 2 = right
+    if (side == 1){
+      leftLockOut = true;
+    } else if (side == 2){
+      rightLockOut = true;
+    }
   }
 
   void airLogic() {
@@ -134,16 +170,14 @@ class collision { //this is where we detect wether a passed in player object is 
     currentPlayer.jump = true; //disable jump input
   }
 
-  void gameEndTrigger() {
+  void topGameEndTrigger() {
     if (currentPlayer.y < 0) {
-      gameEndTrigger = true;
-    } else {
-      gameEndTrigger = false;
+      deathType = 2; //<>//
     }
   }
 
   void collide() {
     logic();
-    gameEndTrigger();
+    topGameEndTrigger();
   }
 }

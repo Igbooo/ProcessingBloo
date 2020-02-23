@@ -49,7 +49,7 @@ class player { //the player lives here, including rendering, animation, movement
       y = 570;
     } else {
       x = 205;
-      y = 140; //default = 840
+      y = 840; //test = 140
     }
   }
 
@@ -62,11 +62,11 @@ class player { //the player lives here, including rendering, animation, movement
 
     for (int i = 0; i < inputArray.length; i++) {
       if (inputArray[i]) {
-        if (i == 0 && sideLockOut == false) {
+        if (i == 0 && leftLockOut == false) {
           x = x - walkSpeed;
           left = true;
           right = false;
-        } else if (i == 1 && sideLockOut == false) {
+        } else if (i == 1 && rightLockOut == false) {
           x = x + walkSpeed;
           right = true;
           left = false;
