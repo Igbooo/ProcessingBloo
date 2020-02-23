@@ -145,6 +145,7 @@ class player { //the player lives here, including rendering, animation, movement
       fallSpeed = 0;
       gravity = 0;
     } else if (airState == 0) {
+      jumpLockOut = true;
       gravity = 0.2;
       y = y + (int)(fallSpeed);
       fallSpeed = fallSpeed + gravity;
