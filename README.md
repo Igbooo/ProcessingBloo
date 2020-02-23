@@ -3,7 +3,6 @@ My Processing game
 
 # Notes (from bottom of main)
 ## List of Issues:
-* spikes spawn ALWAYS when there is overlap, random needs implemented (1/2, 2/3 ?) (not started)
 * jumping along the side and over a platform snaps you to the floor instead of continuing up (maybe its just "movement tech" :^) )
 * entering the air without jumping allows you to buffer a jump
 * timer makes it so the game has to restart in order for the timer to reset.
