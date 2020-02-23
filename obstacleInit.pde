@@ -56,14 +56,19 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
   void spikeInit() {
     //check we can spawn a spike
     for (int i = 1; i < platformList.size() - 4; i = i +2) { //exceptions are made cause the floor is in the array list, will break when [0] is a normal platform
+      int rand = int(random(1, 4));
       platform plt0 = platformList.get(i);
       platform plt1 = platformList.get(i+1);
       platform plt2 = platformList.get(i+2);
       platform plt3 = platformList.get(i+3);
       if (plt1.x < (plt2.x + plt2.pltWidth) - 50) {
-        spikeList.add(new wallSpikes(int(random(plt1.x, (plt2.x + plt2.pltWidth) - 35)), plt1.y - 85, 1)); //x, y, dir
+        if (rand != 4) {
+          spikeList.add(new wallSpikes(int(random(plt1.x, (plt2.x + plt2.pltWidth) - 35)), plt1.y - 85, 1)); //x, y, dir
+        }
       } else if (plt3.x < (plt0.x + plt0.pltWidth) - 50) {
-        spikeList.add(new wallSpikes(int(random(plt3.x, (plt0.x + plt0.pltWidth) - 35)), plt0.y - 85, 2));
+        if (rand != 4) {
+          spikeList.add(new wallSpikes(int(random(plt3.x, (plt0.x + plt0.pltWidth) - 35)), plt0.y - 85, 2));
+        }
       }
     }
   }
