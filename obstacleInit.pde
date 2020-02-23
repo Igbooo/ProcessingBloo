@@ -1,14 +1,14 @@
 class obstacleInit { //obstacleInit calls the creation & display of platforms and wallSpikes
 
   void platformRedraw() {
-    for (int i = platformList.size() - 1; i > 0; i--) {
+    for (int i = platformList.size() - 1; i > -1; i--) {
       platformList.remove(i);
     }
     platformInit();
   }
 
   void spikeRedraw() {
-    for (int i = spikeList.size() - 1; i > 0; i--) {
+    for (int i = spikeList.size() - 1; i > -1; i--) {
       spikeList.remove(i);
     }
     spikeInit();

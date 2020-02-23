@@ -4,8 +4,6 @@ My Processing game
 # Notes (from bottom of main)
 ## List of Issues:
 * jumping along the side and over a platform snaps you to the floor instead of continuing up (maybe its just "movement tech" :^) )
-* entering the air without jumping allows you to buffer a jump
-* timer makes it so the game has to restart in order for the timer to reset.
 
 ## Features to do next
 * having platforms move up, despawn off the top, player stay on the ground when they move

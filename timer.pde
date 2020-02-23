@@ -7,6 +7,7 @@ class timer { //the timer and high score system lives and displays here
   int timerY;
   String hiScore; //10-18 for time
   boolean endRan = false;
+  int totalMillis = 0;
 
   timer(int x, int y) {
     this.timerX = x;
@@ -26,14 +27,18 @@ class timer { //the timer and high score system lives and displays here
         finishTime = createWriter("hiScore.txt");
     }
   }
+  
+  void millisReset() {
+    totalMillis = totalMillis + (millis() - totalMillis);
+  }
 
   void timeSet() { 
-    totalSeconds = millis() / 1000;
+    totalSeconds = (millis() - totalMillis) / 1000;
     minutes = totalSeconds / 60;
     int subSecs = totalSeconds * 100;
     int subMins = minutes * 60;
-    ms = (millis() / 10) - subSecs;
-    seconds = (millis() / 1000) - subMins;
+    ms = ((millis() - totalMillis) / 10) - subSecs;
+    seconds = ((millis() - totalMillis) / 1000) - subMins;
   }
 
   void displayTimer() {

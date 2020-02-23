@@ -140,7 +140,7 @@ class collision { //this is where we detect wether a passed in player object is 
   }
 
   void spikeBladeCollide(){
-    deathType = 1; //<>//
+    deathType = 1;
   }
 
   void bonkLogic() {
@@ -172,7 +172,7 @@ class collision { //this is where we detect wether a passed in player object is 
 
   void topGameEndTrigger() {
     if (currentPlayer.y < 0) {
-      deathType = 2; //<>//
+      deathType = 2;
     }
   }
 

@@ -51,7 +51,7 @@ void setup() {
 
 void draw() {
   if (deathType == 0) {
-    if (lowResMode) { //<>//
+    if (lowResMode) {
       background(backgroundLowRes);
     } else {
       background(background);
@@ -62,7 +62,7 @@ void draw() {
     blue.render();
     obstacleInit.spikeDisplay();
   } else {
-    if (!Timer.endRan) { //<>//
+    if (!Timer.endRan) {
       Timer.end();
     }
     bgMusic.stop();
@@ -70,17 +70,19 @@ void draw() {
     rect(105, height / 2 - 55, 290, 190); //backdrop for the gameover text
     globalText(52);
     if (deathType == 1) {
-      text("Game over\n'R' to quit", 125, height / 2);
+      text("Game over\n'R' to restart", 125, height / 2);
     } else if (deathType == 2){
-      text("You win! \n'R' to quit", 125, height / 2);
+      text("You win! \n'R' to restart", 125, height / 2);
     }
     
     if (inputArray[3]) {
-      //bgMusic.loop();
-      //blue.gameEndTrigger = false;
-      //obstacleInit.platformRedraw();
-      //blue.defXY();
-      exit();
+      bgMusic.loop();
+      deathType = 0;
+      obstacleInit.platformRedraw();
+      obstacleInit.spikeRedraw();
+      blue.defXY();
+      Timer.millisReset();
+      //exit();
     }
   }
 }
