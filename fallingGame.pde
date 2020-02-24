@@ -11,14 +11,15 @@ player blue;
 collision blueCollision;
 timer Timer;
 obstacleInit obstacleInit;
+gameInit gameInit;
 PrintWriter finishTime;
-boolean inputArray[] = new boolean [4]; // 0=LEFT, 1=RIGHT, 2=JUMP 3=RESTART
+boolean inputArray[] = new boolean [6]; // 0=LEFT, 1=RIGHT, 2=JUMP 3=RESTART 4 = ENTER (menu) 5 = DOWN
 ArrayList<platform> platformList = new ArrayList<platform>();
 ArrayList<wallSpikes> spikeList = new ArrayList<wallSpikes>();
-//boolean gameEndTrigger = false;
-boolean lowResMode = true;
+boolean lowResMode = false;
 boolean leftLockOut = false;
 boolean rightLockOut = false;
+boolean menuLockOut = false;
 int deathType = 0; //0 = not dead, 1 = spike death, 2 = win
 int tries = 0;
 
@@ -32,78 +33,36 @@ void settings() {
 }
 
 void setup() {
-  background = loadImage("altBG.png");
-  backgroundLowRes = loadImage("altBGLowRes.png");
-  bgMusic = new SoundFile(this, "bgCLP.wav");
-  bgMusic.amp(0); //default 0.05
-  bgMusic.loop();
-  cSansMS = createFont("comic.ttf", 32);
-  PImage icon = loadImage("icon1.png");
-  surface.setIcon(icon);
-  surface.setTitle("Bloo");
-  blue = new player();
-  obstacleInit = new obstacleInit();
-  blueCollision = new collision(blue);
-  Timer = new timer(25, height - 25);
-  Timer.loadHiScore();
-  obstacleInit.platformInit();
-  obstacleInit.spikeInit();
+  gameInit = new gameInit();
+  gameInit.firstSetup();
+  bgMusic = new SoundFile(this, "bgCLP.wav");      //incidental
+  bgMusic.amp(0); //default 0.05                   //incidental
 }
 
 void draw() {
-  if (deathType == 0) {
-    if (lowResMode) {
-      background(backgroundLowRes);
+  switch(gameInit.gameState) {
+  case 0:
+    gameInit.menuLoop();
+    break;
+
+  case 1:
+    if (deathType == 0) {
+      if (!gameInit.gameSetup) {
+        gameInit.gameSetup();
+        gameInit.gameSetup = true;
+      }
+      gameInit.gameLoop();
+      break;
     } else {
-      background(background);
+      gameInit.endSplash();
+      break;
     }
-    blueCollision.collide(); //sick name btw
-    obstacleInit.platDisplay();
-    obstacleInit.spikeDisplay();
-    obstacleInit.platTopCheck();
-    Timer.render();
-    blue.render();
-  } else {
-    endSplash();
+  case 2:
+    break;
   }
 }
 
-void endSplash() {
-  if (!Timer.endRan) {
-    Timer.end();
-  }
-  bgMusic.stop();
-  if (deathType == 1) {
-    fill(255, 0, 0);
-    rect(-10, height / 2 - 55, width + 20, 190);
-    globalText(52);
-    textAlign(CENTER, TOP);
-    text("Game over\n'R' to restart", 0, height / 2 - 55, width, 190);
-  } 
-  else if (deathType == 2) {
-    fill(0, 200, 0);
-    rect(-10, height / 2 - 55, width + 20, 190);
-    globalText(52);
-    textAlign(CENTER, TOP);
-    text("You win! \n'R' to restart", 0, height / 2 - 55, width, 190);
-  }
-
-  if (inputArray[3]) {
-    restart();
-  }
-}
-
-void restart() {
-  Timer.endRan = false;
-  tries += 1;
-  bgMusic.loop();
-  obstacleInit.platformRedraw();
-  obstacleInit.spikeRedraw();
-  deathType = 0;
-  blue.defXY();
-  Timer.millisReset();
-  Timer.loadHiScore();
-}
+ //<>//
 
 void keyPressed() {
   if (keyCode == LEFT) {
@@ -117,6 +76,12 @@ void keyPressed() {
   }
   if (key == 'r' || key == 'R') {
     inputArray[3] = true;
+  }
+  if (keyCode == 10) {
+    inputArray[4] = true;
+  }
+  if (keyCode == DOWN) {
+    inputArray[5] = true;
   }
 }
 
@@ -132,6 +97,12 @@ void keyReleased() {
   }
   if (key == 'r' || key == 'R') {
     inputArray[3] = false;
+  }
+  if (keyCode == 10) {
+    inputArray[4] = false;
+  }
+  if (keyCode == DOWN) {
+    inputArray[5] = false;
   }
 }
 
