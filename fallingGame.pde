@@ -73,13 +73,18 @@ void endSplash() {
     Timer.end();
   }
   bgMusic.stop();
-  fill(55, 55, 55);
-  rect(0, height / 2 - 55, width, 190); //backdrop for the gameover text
-  globalText(52);
-  textAlign(CENTER, TOP);
   if (deathType == 1) {
+    fill(255, 0, 0);
+    rect(-10, height / 2 - 55, width + 20, 190);
+    globalText(52);
+    textAlign(CENTER, TOP);
     text("Game over\n'R' to restart", 0, height / 2 - 55, width, 190);
-  } else if (deathType == 2) {
+  } 
+  else if (deathType == 2) {
+    fill(0, 200, 0);
+    rect(-10, height / 2 - 55, width + 20, 190);
+    globalText(52);
+    textAlign(CENTER, TOP);
     text("You win! \n'R' to restart", 0, height / 2 - 55, width, 190);
   }
 
