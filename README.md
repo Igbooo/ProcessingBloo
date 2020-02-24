@@ -2,12 +2,21 @@
 My Processing game
 
 # Notes (from bottom of main)
-## List of Issues:
+## List of Issues
 * jumping along the side and over a platform snaps you to the floor instead of continuing up (maybe its just "movement tech" :^) )
+* make spikes spawn on new platforms
+* make game overs not check high score
+* make game overs not increase speed
 
 ## Features to do next
-* having platforms move up, despawn off the top, player stay on the ground when they move
-* levels, speeds, score when you pass a platform, osd(?), menu, PogU
+* display speed (levels) on the osd
+* make the game over screen prettier
+* make a death animation
+* make a invun sprite
+* implement invun
+* implement pause & splash screens
+* have platforms spawn lower and lock the player out on their own platform on game start
+* levels, score when you pass a platform, osd(?), menu, PogU
 * MK ghosts :eyes:
 
 ## List of old issues that were amusing
