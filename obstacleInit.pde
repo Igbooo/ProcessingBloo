@@ -26,8 +26,10 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
   }
 
   void platformInit() { //int x, int y, int pltWidth, int pltType
-    scrollSpeed = (tries + 1) * 0.5;
-  
+    if (tries < 1 || deathType == 2) {
+      scrollSpeed += 0.5;  
+    }
+    
     if (lowResMode) {
       int randWidth;
       int rowVertSpacing = 101;

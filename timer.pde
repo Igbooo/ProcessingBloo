@@ -56,6 +56,8 @@ class timer { //the timer and high score system lives and displays here
     globalText(20);
     
     text("Tries: " + tries, timerX + 250, timerY + 10);
+    
+    text("Speed: " + obstacleInit.scrollSpeed, timerX + 350, timerY + 10);
 
     if (hiScore != null) {
       text("High Score: " + hiScore, timerX + 250, timerY - 20);
@@ -157,7 +159,10 @@ class timer { //the timer and high score system lives and displays here
 
   void end() {
     timeSet();
-    hiCheck();
+    
+    if (deathType == 2) {
+      hiCheck();
+    }
 
     if (finishTime != null) {
       finishTime.flush();

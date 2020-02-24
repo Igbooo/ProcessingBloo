@@ -5,12 +5,12 @@ My Processing game
 ## List of Issues
 * jumping along the side and over a platform snaps you to the floor instead of continuing up (maybe its just "movement tech" :^) )
 * make spikes spawn on new platforms
-* make game overs not check high score
-* make game overs not increase speed
+* jumping along the side and over a platform gets you stuck
 
 ## Features to do next
-* display speed (levels) on the osd
 * make the game over screen prettier
+* high scores per level (speed)
+* backgrounds per level (speed)
 * make a death animation
 * make a invun sprite
 * implement invun

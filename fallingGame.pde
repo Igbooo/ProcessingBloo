@@ -92,9 +92,9 @@ void restart() {
   Timer.endRan = false;
   tries += 1;
   bgMusic.loop();
-  deathType = 0;
   obstacleInit.platformRedraw();
   obstacleInit.spikeRedraw();
+  deathType = 0;
   blue.defXY();
   Timer.millisReset();
   Timer.loadHiScore();
