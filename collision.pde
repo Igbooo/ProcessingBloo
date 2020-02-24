@@ -152,7 +152,7 @@ class collision { //this is where we detect wether a passed in player object is 
 
   void collideLogic(int pltLocation) {
     platform currentPlt = platformList.get(pltLocation);
-    currentPlayer.y = currentPlt.y - 55; //snap to plat
+    currentPlayer.y = currentPlt.y - 57; //snap to plat
     currentPlayer.airState = 1; // mark player as grounded
     currentPlayer.jump = false; // enable jump input
   }
@@ -171,9 +171,9 @@ class collision { //this is where we detect wether a passed in player object is 
   }
 
   void topGameEndTrigger() {
-    if (currentPlayer.y + 50 > height - 75) {
+    if (currentPlayer.y + 60 > height - 75) {
       deathType = 2;
-    } else if (currentPlayer.y < -12) {
+    } else if (currentPlayer.y < -5) {
       deathType = 1;
     }
   }

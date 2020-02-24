@@ -129,8 +129,13 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
     }
     if (!bottomPlat) {
       int randWidth = int(random(60, 440));
-      platformList.add(new platform(-100, 1100, randWidth, 1));
-      platformList.add(new platform((-100+randWidth)+100, 1100, (width-randWidth)+50, 1));
+      if (lowResMode) {
+        platformList.add(new platform(-100, 800, randWidth, 1));
+        platformList.add(new platform((-100+randWidth)+100, 800, (width-randWidth)+50, 1));
+      } else {
+        platformList.add(new platform(-100, 1100, randWidth, 1));
+        platformList.add(new platform((-100+randWidth)+100, 1100, (width-randWidth)+50, 1));
+      }
     }
   }
 }

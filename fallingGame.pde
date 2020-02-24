@@ -16,7 +16,7 @@ boolean inputArray[] = new boolean [4]; // 0=LEFT, 1=RIGHT, 2=JUMP 3=RESTART
 ArrayList<platform> platformList = new ArrayList<platform>();
 ArrayList<wallSpikes> spikeList = new ArrayList<wallSpikes>();
 //boolean gameEndTrigger = false;
-boolean lowResMode = false;
+boolean lowResMode = true;
 boolean leftLockOut = false;
 boolean rightLockOut = false;
 int deathType = 0; //0 = not dead, 1 = spike death, 2 = win
