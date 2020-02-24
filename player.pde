@@ -1,6 +1,6 @@
 class player { //the player lives here, including rendering, animation, movement and gravity
-  int x;
-  int y;
+  float x;
+  float y;
   int walkSpeed = 3;
   float fallSpeed = 0;
   float gravity = 0;
@@ -46,10 +46,10 @@ class player { //the player lives here, including rendering, animation, movement
   void defXY() {
     if (lowResMode) {
       x = 205;
-      y = 570;
+      y = 140;
     } else {
       x = 205;
-      y = 840; //test = 140
+      y = 140; //test = 140
     }
   }
 

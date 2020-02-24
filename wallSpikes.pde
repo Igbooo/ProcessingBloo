@@ -1,6 +1,6 @@
 class wallSpikes { //wall spikes are made here. like the player, they are animated, like platforms, the class is fairly empty cause the collision class exists
-  int x;
-  int y;
+  float x;
+  float y;
   int dir;
   int imgNo = 1;
   int spikeHeight = 86;
@@ -8,7 +8,7 @@ class wallSpikes { //wall spikes are made here. like the player, they are animat
   PImage [] wallSpikeLeft;
   PImage [] wallSpikeRight;
 
-  wallSpikes(int x, int y, int dir) { //1 = left, 2 = right
+  wallSpikes(float x, float y, int dir) { //1 = left, 2 = right
     this.x = x;
     this.y = y;
     this.dir = dir;

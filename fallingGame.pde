@@ -59,9 +59,10 @@ void draw() {
     }
     blueCollision.collide(); //sick name btw
     obstacleInit.platDisplay();
+    obstacleInit.spikeDisplay();
+    obstacleInit.platTopCheck();
     Timer.render();
     blue.render();
-    obstacleInit.spikeDisplay();
   } else {
     endSplash();
   }

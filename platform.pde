@@ -1,6 +1,6 @@
 class platform { //this is where we make platforms (they're just rect's)
-  int x;
-  int y;
+  float x;
+  float y;
   int pltWidth;
   int pltHeight;
   color pltColor = color(55, 55, 55); //old = (255, 180, 107)

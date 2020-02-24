@@ -171,8 +171,10 @@ class collision { //this is where we detect wether a passed in player object is 
   }
 
   void topGameEndTrigger() {
-    if (currentPlayer.y < 0) {
+    if (currentPlayer.y + 50 > height - 75) {
       deathType = 2;
+    } else if (currentPlayer.y < -12) {
+      deathType = 1;
     }
   }
 

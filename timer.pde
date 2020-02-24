@@ -45,6 +45,13 @@ class timer { //the timer and high score system lives and displays here
   }
 
   void displayTimer() {
+    if (lowResMode) {
+      fill(55, 55, 55);
+      rect(-10, 625, 900, 75);
+    } else {
+      fill(55, 55, 55);
+      rect(-10, 925, 700, 75);
+    }
     
     globalText(20);
     
@@ -92,7 +99,7 @@ class timer { //the timer and high score system lives and displays here
   void hiCheck() {
     ms -= 2;
     if (hiScore != null) {
-      int [] hiTime = int(split(hiScore, ':')); //<>//
+      int [] hiTime = int(split(hiScore, ':'));
       if (minutes < hiTime[0]) {
         writeTime();
       } else if (minutes > hiTime[0]) {
