@@ -23,6 +23,7 @@ boolean menuLockOut = false;
 int deathType = 0; //0 = not dead, 1 = spike death, 2 = win
 int tries = 0;
 float level = obstacleInit.scrollSpeed * 2;
+int globGameState = 0;
 
 void settings() {
   if (lowResMode) {
@@ -39,8 +40,9 @@ void setup() {
   //bgMusic.amp(0); //default 0.05                   //incidental
 }
 
+
 void draw() {
-  switch(gameInit.gameState) { //<>//
+  switch(globGameState) { //<>//
   case 0:
     gameInit.menuLoop();
     break;

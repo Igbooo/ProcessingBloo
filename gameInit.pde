@@ -2,7 +2,11 @@ class gameInit {
 
   boolean gameSetup = false;
   int currentMenuArray = 0;
-  int gameState = 0; //0 = menu, 1 = game, 2 = pause
+  int gameState; //0 = menu, 1 = game, 2 = pause
+
+  gameInit() {
+    gameState = 0;
+  }
 
   void firstSetup() {
     background = loadImage("altBG.png");             //incidental

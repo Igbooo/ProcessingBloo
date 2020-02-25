@@ -5,15 +5,17 @@ class timer { //the timer and high score system lives and displays here
   int minutes; 
   int timerX;
   int timerY;
-  String hiScore []; //10-18 for time
+  String hiScore [];
   boolean endRan = false;
   int totalMillis = 0;
-  int[][] hiTime = new int[5][3];
+  int[][] hiTime;
   int intLevel = int(level);
 
   timer(int x, int y) {
     this.timerX = x;
     this.timerY = y;
+    hiScore = new String[5]; //10-18 for time
+    hiTime = new int[5][3];
   }
 
   void loadHiScore() {
@@ -121,12 +123,13 @@ class timer { //the timer and high score system lives and displays here
   void hiCheck() {
     ms -= 2;
     if (hiScore[0] != null) {
-      
-      hiTime[0] = int(split(hiScore[0], ':'));
-      hiTime[1] = int(split(hiScore[1], ':'));
-      hiTime[2] = int(split(hiScore[2], ':'));
-      hiTime[3] = int(split(hiScore[3], ':'));
-      hiTime[4] = int(split(hiScore[4], ':'));
+      int [] hiSplit = new int[3];
+      for (int i = 0; i < 5; i++) {
+        hiSplit = int(split(hiScore[i], ":"));
+        hiTime[i][0] = hiSplit[0];
+        hiTime[i][1] = hiSplit[1];
+        hiTime[i][2] = hiSplit[2];
+      }
       if (minutes < hiTime[intLevel][0]) {
         writeTime();
       } else if (minutes > hiTime[intLevel][0]) {
@@ -175,7 +178,7 @@ class timer { //the timer and high score system lives and displays here
         if (ms < 10) {
           hiScore[intLevel] = (minutes + ":" + seconds + ":0" + ms);
         } else {
-          hiScore[intLevel] = (minutes + ":" + seconds + ":" + ms);
+          hiScore[intLevel] = (minutes + ":" + seconds + ":" + ms); //<>//
         }
       }
     }
