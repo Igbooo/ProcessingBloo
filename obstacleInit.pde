@@ -1,4 +1,4 @@
-class obstacleInit { //obstacleInit calls the creation & display of platforms and wallSpikes //<>//
+class obstacleInit { //obstacleInit calls the creation & display of platforms and wallSpikes //<>// //<>// //<>//
 
   float scrollSpeed;
   int lowestPointY;
@@ -27,9 +27,9 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
 
   void platformInit() { //int x, int y, int pltWidth, int pltType
     if (tries < 1 || deathType == 2) {
-      scrollSpeed += 0.5;  
+      scrollSpeed += 0.5;
     }
-    
+
     if (lowResMode) {
       int randWidth;
       int rowVertSpacing = 101;
@@ -39,7 +39,7 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
       for (int i = 0; i <= rows; i++) {
         randWidth = int(random(60, 440));
         platformList.add(new platform(-100, lowestRowY, randWidth, 1));
-        platformList.add(new platform((-100+randWidth)+100, lowestRowY, (width-randWidth)+200, 1));  //<>//
+        platformList.add(new platform((-100+randWidth)+100, lowestRowY, (width-randWidth)+200, 1)); 
         lowestRowY -= 100;
       }
       //ground
@@ -75,7 +75,7 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
 
   void spikeInit() {
     //check we can spawn a spike
-    for (int i = 0; i < platformList.size() - 4; i = i +2) { //exceptions are made cause the floor is in the array list, will break when [0] is a normal platform
+    for (int i = 0; i < platformList.size() - 4; i = i + 2) {
       int rand = int(random(1, 4));
       platform plt0 = platformList.get(i);
       platform plt1 = platformList.get(i+1);
@@ -83,11 +83,11 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
       platform plt3 = platformList.get(i+3);
       if (plt1.x < (plt2.x + plt2.pltWidth) - 50) {
         if (rand != 4) {
-          spikeList.add(new wallSpikes(int(random(plt1.x, (plt2.x + plt2.pltWidth) - 35)), plt1.y - 85, 1)); //x, y, dir
+          spikeList.add(new wallSpikes(int(random(plt1.x, (plt2.x + plt2.pltWidth) - 35)), plt1.y - 85, 2)); //x, y, dir
         }
       } else if (plt3.x < (plt0.x + plt0.pltWidth) - 50) {
         if (rand != 4) {
-          spikeList.add(new wallSpikes(int(random(plt3.x, (plt0.x + plt0.pltWidth) - 35)), plt0.y - 85, 2));
+          spikeList.add(new wallSpikes(int(random(plt3.x, (plt0.x + plt0.pltWidth) - 35)), plt0.y - 85, 1));
         }
       }
     }
@@ -102,6 +102,37 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
     for (int i = 0; i < spikeList.size(); i++) {
       wallSpikes currentSpike = spikeList.get(i);
       currentSpike.render();
+    }
+  }
+
+  void spikeTopCheck() {
+    for (int i = 0; i < spikeList.size(); i++) {
+      wallSpikes currentSpikes = spikeList.get(i);
+      if (currentSpikes.y < -60) {
+        spikeList.remove(i);
+      }
+    }
+  }
+
+
+  void spikeBottomCheck() {
+    int i = platformList.size() - 4;
+    int rand = int(random(1, 4));
+    platform plt2 = platformList.get(i);
+    platform plt3 = platformList.get(i+1);
+    platform plt0 = platformList.get(i+2);
+    platform plt1 = platformList.get(i+3);
+
+    if (!((plt0.y - plt2.y) > 110)) { //checks if the platforms are within 110 pixels, prevents a weird 1 time per round bug cause of array list positions
+      if (plt1.x < (plt2.x + plt2.pltWidth) - 50) {
+        if (rand != 4) {
+          spikeList.add(new wallSpikes(int(random(plt1.x, (plt2.x + plt2.pltWidth) - 35)), plt1.y - 85, 2)); //x, y, dir
+        }
+      } else if (plt3.x < (plt0.x + plt0.pltWidth) - 50) {
+        if (rand != 4) {
+          spikeList.add(new wallSpikes(int(random(plt3.x, (plt0.x + plt0.pltWidth) - 35)), plt0.y - 85, 1));
+        }
+      }
     }
   }
 
@@ -127,14 +158,17 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
         }
       }
     }
+
     if (!bottomPlat) {
       int randWidth = int(random(60, 440));
       if (lowResMode) {
         platformList.add(new platform(-100, 800, randWidth, 1));
         platformList.add(new platform((-100+randWidth)+100, 800, (width-randWidth)+50, 1));
+        spikeBottomCheck();
       } else {
         platformList.add(new platform(-100, 1100, randWidth, 1));
         platformList.add(new platform((-100+randWidth)+100, 1100, (width-randWidth)+50, 1));
+        spikeBottomCheck();
       }
     }
   }

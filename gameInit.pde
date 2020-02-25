@@ -17,7 +17,7 @@ class gameInit {
     blue = new player();                             //on game load
     obstacleInit = new obstacleInit();               //on game load
     blueCollision = new collision(blue);             //on game laod
-    bgMusic.loop();                                  //on game load
+    //bgMusic.loop();                                  //on game load
     Timer = new timer(25, height - 25);              //on game load
     Timer.loadHiScore();                             //game load
     obstacleInit.platformInit();                     //game load
@@ -98,6 +98,7 @@ class gameInit {
     obstacleInit.platDisplay();
     obstacleInit.spikeDisplay();
     obstacleInit.platTopCheck();
+    obstacleInit.spikeTopCheck();
     Timer.render();
     blue.render();
   }
@@ -106,7 +107,7 @@ class gameInit {
     if (!Timer.endRan) {
       Timer.end();
     }
-    bgMusic.stop();
+    //bgMusic.stop();
     if (deathType == 1) {
       fill(255, 0, 0); 
       rect(-10, height / 2 - 55, width + 20, 300);
@@ -115,7 +116,7 @@ class gameInit {
       text("Game over\n'R' to restart\n Enter to go to menu", 0, height / 2 - 55, width, 300);
     } else if (deathType == 2) {
       fill(0, 200, 0);
-      rect(-10, height / 2 - 55, width + 20, 190);
+      rect(-10, height / 2 - 55, width + 20, 300);
       globalText(50);
       textAlign(CENTER, TOP);
       text("You win! \n'R' to restart\n Enter to go to menu", 0, height / 2 - 55, width, 300);
@@ -132,7 +133,7 @@ class gameInit {
   void restart() {
     Timer.endRan = false;
     tries += 1;
-    bgMusic.loop();
+    //bgMusic.loop();
     obstacleInit.platformRedraw();
     obstacleInit.spikeRedraw();
     deathType = 0;

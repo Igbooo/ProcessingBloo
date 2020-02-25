@@ -4,7 +4,6 @@ My Processing game
 # Notes (from bottom of main)
 ## List of Issues
 * jumping along the side and over a platform snaps you to the floor instead of continuing up (maybe its just "movement tech" :^) )
-* make spikes spawn on new platforms
 
 ## Features to do next
 * make the game over screen prettier (kinda done)
