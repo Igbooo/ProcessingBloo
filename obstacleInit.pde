@@ -1,6 +1,6 @@
 class obstacleInit { //obstacleInit calls the creation & display of platforms and wallSpikes //<>// //<>// //<>//
 
-  float scrollSpeed;
+  float scrollSpeed = 0;
   int lowestPointY;
 
   obstacleInit() {
