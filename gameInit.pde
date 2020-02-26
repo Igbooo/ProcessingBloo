@@ -17,11 +17,12 @@ class gameInit {
     blue = new player();                             //on game load
     obstacleInit = new obstacleInit();               //on game load
     blueCollision = new collision(blue);             //on game laod
-    //bgMusic.loop();                                  //on game load
+    bgMusic.loop();                                  //on game load
     Timer = new timer(25, height - 25);              //on game load
     Timer.loadHiScore();                             //game load
     obstacleInit.platformInit();                     //game load
-    obstacleInit.spikeInit();                        //game load  
+    obstacleInit.spikeInit();                        //game load
+    Timer.millisReset();
     gameSetup = true;
   }
 
@@ -55,7 +56,7 @@ class gameInit {
 
     globalText(32);
     textAlign(CENTER, CENTER);
-    text("Play Game", 0, 200, width, 250); 
+    text("Play Game", 0, 200, width, 250);
     text("View High Scores", 0, 250, width, 300);
     text("Quit", 0, 300, width, 350);
 
@@ -107,9 +108,9 @@ class gameInit {
     if (!Timer.endRan) {
       Timer.end();
     }
-    //bgMusic.stop();
+    bgMusic.stop();
     if (deathType == 1) {
-      fill(255, 0, 0); 
+      fill(255, 0, 0);
       rect(-10, height / 2 - 55, width + 20, 300);
       globalText(50);
       textAlign(CENTER, TOP);
@@ -133,7 +134,7 @@ class gameInit {
   void restart() {
     Timer.endRan = false;
     tries += 1;
-    //bgMusic.loop();
+    bgMusic.loop();
     obstacleInit.platformRedraw();
     obstacleInit.spikeRedraw();
     deathType = 0;

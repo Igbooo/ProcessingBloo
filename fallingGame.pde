@@ -35,8 +35,8 @@ void settings() {
 void setup() {
   gameInit = new gameInit();
   gameInit.firstSetup();
-  //bgMusic = new SoundFile(this, "bgCLP.wav");      //incidental
-  //bgMusic.amp(0); //default 0.05                   //incidental
+  bgMusic = new SoundFile(this, "bgCLP.wav");      //incidental
+  bgMusic.amp(0.05); //default 0.05                   //incidental
 }
 
 void draw() {
