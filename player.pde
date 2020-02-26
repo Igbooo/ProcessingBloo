@@ -17,12 +17,13 @@ class player { //the player lives here, including rendering, animation, movement
   PImage[] blueWalkRight;
   PImage[] blueFlyLeft;
   PImage[] blueFlyRight;
+  PImage blueDeath;
 
 
   player() {
     defXY();
 
-    blueIdle = new PImage[2]; 
+    blueIdle = new PImage[2];
     blueIdle[0] = loadImage("idle0.png"); //6 over, 8 under, 12 sides
     blueIdle[1] = loadImage("idle1.png");
 
@@ -41,6 +42,8 @@ class player { //the player lives here, including rendering, animation, movement
     blueFlyRight = new PImage[2];
     blueFlyRight[0] = loadImage("jumpRight0.png");
     blueFlyRight[1] = loadImage("jumpRight1.png");
+
+    blueDeath = loadImage("blueDeath0.png");
   }
 
   void defXY() {
@@ -90,44 +93,48 @@ class player { //the player lives here, including rendering, animation, movement
 
 
   void display() {
-    if (left && !right) {
-      if (airState == 1) {
-        if (frameCount % 10 == 0)
-        {
-          globalSwap(blueWalkLeft);
+    if (deathType == 0) {
+      if (left && !right) {
+        if (airState == 1) {
+          if (frameCount % 10 == 0)
+          {
+            globalSwap(blueWalkLeft);
+          } else {
+            image(blueWalkLeft[imgNo], x, y);
+          }
         } else {
-          image(blueWalkLeft[imgNo], x, y);
+          if (frameCount % 10 == 0)
+          {
+            globalSwap(blueFlyLeft);
+          } else {
+            image(blueFlyLeft[imgNo], x, y);
+          }
+        }
+      } else if (right && !left) {
+        if (airState == 1) {
+          if (frameCount % 10 == 0)
+          {
+            globalSwap(blueWalkRight);
+          } else {
+            image(blueWalkRight[imgNo], x, y);
+          }
+        } else {
+          if (frameCount % 10 == 0)
+          {
+            globalSwap(blueFlyRight);
+          } else {
+            image(blueFlyRight[imgNo], x, y);
+          }
         }
       } else {
-        if (frameCount % 10 == 0)
-        {
-          globalSwap(blueFlyLeft);
+        if (frameCount % 30 == 0) {
+          globalSwap(blueIdle);
         } else {
-          image(blueFlyLeft[imgNo], x, y);
+          image(blueIdle[imgNo], x, y);
         }
       }
-    } else if (right && !left) {
-      if (airState == 1) {
-        if (frameCount % 10 == 0)
-        {
-          globalSwap(blueWalkRight);
-        } else {
-          image(blueWalkRight[imgNo], x, y);
-        }
-      } else {
-        if (frameCount % 10 == 0)
-        {
-          globalSwap(blueFlyRight);
-        } else {
-          image(blueFlyRight[imgNo], x, y);
-        }
-      }
-    } else {
-      if (frameCount % 30 == 0) {
-        globalSwap(blueIdle);
-      } else {
-        image(blueIdle[imgNo], x, y);
-      }
+    } else if (deathType == 1) {
+      image(blueDeath, x, y);
     }
   }
 
@@ -140,7 +147,7 @@ class player { //the player lives here, including rendering, animation, movement
     image(array[imgNo], x, y);
   }
 
-  void gravity() { 
+  void gravity() {
     if (airState == 1) {
       fallSpeed = 0;
       gravity = 0;

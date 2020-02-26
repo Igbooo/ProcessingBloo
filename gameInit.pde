@@ -27,6 +27,7 @@ class gameInit {
   }
 
   void menuLoop() {
+    bgMusic.stop();
     if (menuLockOut == true && (!inputArray[2] && !inputArray [5] && !inputArray[4])) {
       menuLockOut = false;
     }
@@ -107,8 +108,10 @@ class gameInit {
   void endSplash() {
     if (!Timer.endRan) {
       Timer.end();
+      bgMusic.stop();
+      blue.display();
+      delay(1000);
     }
-    bgMusic.stop();
     if (deathType == 1) {
       fill(255, 0, 0);
       rect(-10, height / 2 - 55, width + 20, 300);
