@@ -39,7 +39,7 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
       for (int i = 0; i <= rows; i++) {
         randWidth = int(random(60, 440));
         platformList.add(new platform(-100, lowestRowY, randWidth, 1));
-        platformList.add(new platform((-100+randWidth)+100, lowestRowY, (width-randWidth)+200, 1)); 
+        platformList.add(new platform((-100+randWidth)+100, lowestRowY, (width-randWidth)+200, 1));
         lowestRowY -= 100;
       }
       //ground
@@ -47,13 +47,13 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
     } else {
       int randWidth;
       int rowVertSpacing = 101;
-      int lowestRowY = 1001; //850 
+      int lowestRowY = 1001; //850
       int rows = ((lowestRowY/rowVertSpacing));
 
       for (int i = 0; i <= rows; i++) {
         randWidth = int(random(60, 440));
         platformList.add(new platform(-100, lowestRowY, randWidth, 1));
-        platformList.add(new platform((-100+randWidth)+100, lowestRowY, (width-randWidth)+50, 1)); 
+        platformList.add(new platform((-100+randWidth)+100, lowestRowY, (width-randWidth)+50, 1));
         lowestRowY -= 100;
       }
       //ground
@@ -93,7 +93,7 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
     }
   }
 
-  void spikeDisplay() {    
+  void spikeDisplay() {
     for (int i = 0; i < spikeList.size(); i++) {
       wallSpikes currentSpikes = spikeList.get(i);
       currentSpikes.y -= scrollSpeed;

@@ -22,6 +22,4 @@ class platform { //this is where we make platforms (they're just rect's)
     fill(pltColor);
     rect(x, y, pltWidth, pltHeight);
   }
-  
-  
 }

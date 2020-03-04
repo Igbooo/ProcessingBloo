@@ -21,16 +21,16 @@ class timer { //the timer and high score system lives and displays here
       hiScore = lines[0].substring(11, 19);
     } 
     catch (StringIndexOutOfBoundsException exception) {
-        finishTime = createWriter("hiScore.txt");
+      finishTime = createWriter("hiScore.txt");
     }
     catch (ArrayIndexOutOfBoundsException exception1) {
-        finishTime = createWriter("hiScore.txt");
+      finishTime = createWriter("hiScore.txt");
     }
     catch (NullPointerException exception2) {
       finishTime = createWriter("hiScore.txt");
     }
   }
-  
+
   void millisReset() {
     totalMillis = totalMillis + (millis() - totalMillis);
   }
@@ -52,11 +52,11 @@ class timer { //the timer and high score system lives and displays here
       fill(55, 55, 55);
       rect(-10, 925, 700, 75);
     }
-    
+
     globalText(20);
-    
+
     text("Tries: " + tries, timerX + 250, timerY + 10);
-    
+
     text("Speed: " + obstacleInit.scrollSpeed, timerX + 350, timerY + 10);
 
     if (hiScore != null) {
@@ -64,7 +64,7 @@ class timer { //the timer and high score system lives and displays here
     } else {
       text("Complete a run to set a high score", timerX + 150, timerY - 20);
     }
-    
+
     globalText(32);
 
     if (minutes < 10) {
@@ -73,7 +73,7 @@ class timer { //the timer and high score system lives and displays here
           text("0" + minutes + ":0" + seconds + ":0" + ms, timerX, timerY);
         } else {
           text("0" + minutes + ":0" + seconds + ":" + ms, timerX, timerY);
-        } 
+        }
       } else {
         if (ms < 10) {
           text("0" + minutes + ":" + seconds + ":0" + ms, timerX, timerY);
@@ -132,7 +132,7 @@ class timer { //the timer and high score system lives and displays here
           finishTime.println("Best time: 0" + minutes + ":0" + seconds + ":0" + ms);
         } else {
           finishTime.println("Best time: 0" + minutes + ":0" + seconds + ":" + ms);
-        } 
+        }
       } else {
         if (ms < 10) {
           finishTime.println("Best time: 0" + minutes + ":" + seconds + ":0" + ms);
@@ -159,7 +159,7 @@ class timer { //the timer and high score system lives and displays here
 
   void end() {
     timeSet();
-    
+
     if (deathType == 2) {
       hiCheck();
     }

@@ -139,7 +139,7 @@ class collision { //this is where we detect wether a passed in player object is 
     }
   }
 
-  void spikeBladeCollide(){
+  void spikeBladeCollide() {
     deathType = 1;
   }
 
@@ -158,9 +158,9 @@ class collision { //this is where we detect wether a passed in player object is 
   }
 
   void wallCollLogic(int side) {//1 = left, 2 = right
-    if (side == 1){
+    if (side == 1) {
       leftLockOut = true;
-    } else if (side == 2){
+    } else if (side == 2) {
       rightLockOut = true;
     }
   }
