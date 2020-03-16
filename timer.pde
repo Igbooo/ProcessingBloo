@@ -41,7 +41,20 @@ class timer { //the timer and high score system lives and displays here
     int subSecs = totalSeconds * 100;
     int subMins = minutes * 60;
     ms = ((millis() - totalMillis) / 10) - subSecs;
-    seconds = ((millis() - totalMillis) / 1000) - subMins;
+    seconds = ((millis() - totalMillis) / 1000) - subMins - 3;
+  }
+
+  void dispFreezeTimer() {
+    if (lowResMode) {
+      fill(55, 55, 55);
+      rect(-10, 625, 900, 75);
+    } else {
+      fill(55, 55, 55);
+      rect(-10, 925, 700, 75);
+    } 
+    
+    globalText(32);
+    text(str(seconds), timerX + 200, timerY);
   }
 
   void displayTimer() {
@@ -169,6 +182,11 @@ class timer { //the timer and high score system lives and displays here
       finishTime.close();
     }
     endRan = true;
+  }
+  
+  void freezeRender() {
+    timeSet();
+    dispFreezeTimer();
   }
 
   void render() {

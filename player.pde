@@ -164,4 +164,8 @@ class player { //the player lives here, including rendering, animation, movement
     gravity();
     display();
   }
+  
+  void freezeRender() {
+    display();
+  }
 }

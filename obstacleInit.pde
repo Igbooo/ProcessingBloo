@@ -79,6 +79,13 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
       currentPlt.render();
     }
   }
+  
+  void freezePlatDisplay() {
+    for (int i = 0; i < platformList.size(); i++) {
+      platform currentPlt = platformList.get(i);
+      currentPlt.render();
+    }
+  }
 
   void spikeInit() {
     //check we can spawn a spike
@@ -106,6 +113,13 @@ class obstacleInit { //obstacleInit calls the creation & display of platforms an
       currentSpikes.y -= scrollSpeed;
     }
 
+    for (int i = 0; i < spikeList.size(); i++) {
+      wallSpikes currentSpike = spikeList.get(i);
+      currentSpike.render();
+    }
+  }
+  
+  void freezeSpikeDisplay() {
     for (int i = 0; i < spikeList.size(); i++) {
       wallSpikes currentSpike = spikeList.get(i);
       currentSpike.render();

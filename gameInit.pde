@@ -1,6 +1,7 @@
 class gameInit { //<>//
 
   boolean gameSetup = false;
+  boolean freezeTime = true;
   int currentMenuArray = 0;
   int gameState = 0; //0 = menu, 1 = game, 2 = pause
   int eMenuState = 0; //0 = moving into frame, 1 = remaining in frame, 2 = moving out of frame
@@ -76,7 +77,7 @@ class gameInit { //<>//
     if (inputArray[4] && menuLockOut == false) {
       switch(currentMenuArray) {
       case 0:
-        if (deathType != 0) {
+        if (gameSetup) {
           restart();
         }
         gameState = 1;
@@ -92,6 +93,19 @@ class gameInit { //<>//
     }
   }
 
+  void freezeLoop() {
+    if (lowResMode) {
+      background(backgroundLowRes);
+    } else {
+      background(background);
+    }
+    blueCollision.collide(); //sick name btw
+    obstacleInit.freezePlatDisplay();
+    obstacleInit.freezeSpikeDisplay();
+    Timer.freezeRender();
+    blue.freezeRender();
+  }
+
   void gameLoop() {
     if (lowResMode) {
       background(backgroundLowRes);
@@ -105,6 +119,10 @@ class gameInit { //<>//
     obstacleInit.spikeTopCheck();
     Timer.render();
     blue.render();
+
+    if (inputArray[6]) {
+      gameState = 2;
+    }
   }
 
   void endSplash() {
@@ -214,6 +232,75 @@ class gameInit { //<>//
     }
   }
 
+  void pauseLoop() {
+    bgMusic.stop();
+    if (menuLockOut == true && (!inputArray[2] && !inputArray [5] && !inputArray[4])) {
+      menuLockOut = false;
+    }
+
+    if (inputArray[2] && menuLockOut == false) {
+      menuLockOut = true;
+      currentMenuArray -= 1;
+      if (currentMenuArray == -1) {
+        currentMenuArray = 3;
+      }
+    } else if (inputArray[5] && menuLockOut == false) {
+      menuLockOut = true;
+      currentMenuArray += 1;
+      if (currentMenuArray == 4) {
+        currentMenuArray = 0;
+      }
+    }
+
+    fill(55, 55, 55);
+    rect(0, 0, width, 500 );
+
+    globalText(48);
+    textAlign(CENTER, CENTER);
+    text("Paused", 0, 0, width, 100);
+
+    globalText(32);
+    textAlign(CENTER, CENTER);
+    text("Resume", 0, 100, width, 150);
+    text("Restart", 0, 150, width, 200);
+    text("Back to Menu", 0, 200, width, 250);
+    text("Quit", 0, 250, width, 300);
+
+    stroke(255);
+    strokeWeight(2);
+    if (currentMenuArray == 0) {
+      line(150, 200, 350, 200);
+    } else if (currentMenuArray == 1) {
+      line(150, 275, 350, 275);
+    } else if (currentMenuArray == 2) {
+      line(100, 350, 400, 350);
+    } else if (currentMenuArray == 3) {
+      line(175, 425, 325, 425);
+    }
+
+    if (inputArray[4] && menuLockOut == false) {
+      switch(currentMenuArray) {
+      case 0:
+        gameState = 1;
+        menuLockOut = true;
+        break;
+      case 1:
+        menuLockOut = true;
+        restart();
+        gameState = 1;
+        break;
+      case 2:
+        menuLockOut = true;
+        gameState = 0;
+        break;
+      case 3:
+        menuLockOut = true;
+        exit();
+        break;
+      }
+    }
+  }
+
   void restart() {
     menuRectY = 0;
     Timer.endRan = false;
@@ -225,5 +312,7 @@ class gameInit { //<>//
     blue.defXY();
     Timer.millisReset();
     Timer.loadHiScore();
+    timeStamp = -1;
+    freezeTime = true;
   }
 }

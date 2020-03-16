@@ -13,7 +13,7 @@ timer Timer;
 obstacleInit obstacleInit;
 gameInit gameInit;
 PrintWriter finishTime;
-boolean inputArray[] = new boolean [6]; // 0=LEFT, 1=RIGHT, 2=JUMP 3=RESTART 4 = ENTER (menu) 5 = DOWN
+boolean inputArray[] = new boolean [7]; //go look in keyPressed it makes sense lol
 ArrayList<platform> platformList = new ArrayList<platform>();
 ArrayList<wallSpikes> spikeList = new ArrayList<wallSpikes>();
 boolean lowResMode = false;
@@ -22,7 +22,7 @@ boolean rightLockOut = false;
 boolean menuLockOut = false;
 int deathType = 0; //0 = not dead, 1 = spike death, 2 = win
 int tries = 0;
-
+int timeStamp = -1;
 
 void settings() {
   if (lowResMode) {
@@ -41,28 +41,40 @@ void setup() {
 
 void draw() {
   switch(gameInit.gameState) {
-  case 0:
+  case 0: //menu
     gameInit.menuLoop();
     break;
 
-  case 1:
+  case 1: // game ing
     if (deathType == 0) {
       if (!gameInit.gameSetup) {
         gameInit.gameSetup();
         gameInit.gameSetup = true;
       }
-      gameInit.gameLoop();
+      if (gameInit.freezeTime) {
+        if (timeStamp == -1) {
+          timeStamp = millis();
+        }
+        
+        if (millis() > timeStamp + 3000) {
+          gameInit.freezeTime = false;
+        } else {
+          gameInit.freezeLoop();
+        }
+      } else {
+        gameInit.gameLoop();
+      }
       break;
     } else {
       gameInit.endSplash();
       break;
     }
-  case 2:
+    
+  case 2: //paused !!!
+    gameInit.pauseLoop();
     break;
   }
 }
-
-
 
 void keyPressed() {
   if (keyCode == LEFT) {
@@ -82,6 +94,9 @@ void keyPressed() {
   }
   if (keyCode == DOWN) {
     inputArray[5] = true;
+  }
+  if (key == 'p' || key == 'P') {
+    inputArray[6] = true;
   }
 }
 
@@ -103,6 +118,9 @@ void keyReleased() {
   }
   if (keyCode == DOWN) {
     inputArray[5] = false;
+  }
+  if (key == 'p' || key == 'P') {
+    inputArray[6] = false;
   }
 }
 
