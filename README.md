@@ -1,5 +1,5 @@
 # ProcessingBloo
-My Processing game
+This is a game I made for a programming project in my first year at uni. Arrow keys are controls, the high score menu isn't supposed to work.
 
 # Notes (from bottom of main)
 ## List of Issues
